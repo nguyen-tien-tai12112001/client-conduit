@@ -55,7 +55,7 @@ const Home = () => {
                 <Col xs={1} md={3} xl={3}></Col>
 
                 <Col xs={1} md={3} xl={3}></Col>
-                <Col xs={20} md={14} xl={14}>
+                {/* <Col xs={20} md={14} xl={14}>
                     <div>
                         <div className="article-preview">
                             <div className="article-meta">
@@ -115,7 +115,7 @@ const Home = () => {
                         </div>
                     </div>
                 </Col>              
-                <Col xs={1} md={7} xl={7}></Col>
+                <Col xs={1} md={7} xl={7}></Col> */}
             </Row>
 
             
