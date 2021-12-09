@@ -13,8 +13,7 @@ const postsReducer =  (state = { isLoading: true, posts: [] }, action:any) => {
         currentPage: action.payload.currentPage,
         numberOfPages: action.payload.numberOfPages,
       };
-    case FETCH_BY_SEARCH:
-      return { ...state, posts: action.payload.data };
+    
     case FETCH_POST:
       return { ...state, post: action.payload.post };
     case LIKE:
@@ -30,6 +29,7 @@ const postsReducer =  (state = { isLoading: true, posts: [] }, action:any) => {
         }),
       };
     case CREATE:
+      console.log(action.payload);
       return { ...state, posts: [...state.posts, action.payload] };
     case UPDATE:
       return { ...state, posts: state.posts.map((post:any) => (post._id === action.payload._id ? action.payload : post)) };

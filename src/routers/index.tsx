@@ -3,10 +3,7 @@ import {
     Routes,
     Route
   } from "react-router-dom";
-import { Home, Login, NewPost, Register, Setting } from "../pages";
-import Profile from "../pages/Profile";
-
-
+import { Home, Login, NewPost, PostDetail, Register, Setting ,Profile} from "../pages";
 
 const Router = () => {
     return (
@@ -16,7 +13,8 @@ const Router = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/setting" element={<Setting />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/newpost" element={<NewPost />} />
+        <Route path="/posts" element={<NewPost />} />
+        <Route path="/posts/:id" element={<PostDetail />} />
     </Routes>
     )
 }

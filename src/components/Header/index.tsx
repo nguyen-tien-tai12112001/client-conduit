@@ -57,8 +57,8 @@ const HeaderComponents = () => {
         </Menu.Item>
         </>) : (
         <>
-        <Menu.Item key="newpost"  icon={<FormOutlined />}>
-        <Link to="/newpost">New post</Link>    
+        <Menu.Item key="post"  icon={<FormOutlined />}>
+        <Link to="/posts">New post</Link>    
         </Menu.Item>
         <Menu.Item key="setting"  icon={<SettingOutlined />}>
         <Link to="/setting">Settings</Link>
