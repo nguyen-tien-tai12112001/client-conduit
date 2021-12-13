@@ -1,8 +1,8 @@
-import React from 'react'
-import { Row, Col } from 'antd';
 import {
-    GithubOutlined
-  } from '@ant-design/icons';
+  GithubOutlined
+} from '@ant-design/icons';
+import { Col, Row } from 'antd';
+import React from 'react';
 const Footer = () => {
     return (
         <Row>

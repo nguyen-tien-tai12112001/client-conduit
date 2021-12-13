@@ -1,5 +1,5 @@
-import { AUTH, LOGIN_FAIL, SIGNUP_FAIL,UPDATE_PROFILE } from '../constants/actionTypes';
 import * as api from '../api/auth';
+import { AUTH, LOGIN_FAIL, SIGNUP_FAIL, UPDATE_PROFILE } from '../constants/actionTypes';
 
  const signin = (formData:any, router:any) => async (dispatch:any) => {
   try {
@@ -50,4 +50,5 @@ import * as api from '../api/auth';
   }
 };
 
-export {signin,signup,updateProfile}
+export { signin, signup, updateProfile };
+

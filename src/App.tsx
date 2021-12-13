@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
-import { DatePicker, message,Button } from 'antd';
 import 'antd/dist/antd.css';
+import React from 'react';
 import './App.css';
-import { Login, Register } from './pages';
-import { Header,Footer } from './components';
+import { Footer, Header } from './components';
 import Router from './routers';
 
 function App() {

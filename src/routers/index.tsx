@@ -1,9 +1,7 @@
 import {
-    
-    Routes,
-    Route
-  } from "react-router-dom";
-import { Home, Login, NewPost, PostDetail, Register, Setting ,Profile} from "../pages";
+  Route, Routes
+} from "react-router-dom";
+import { Home, Login, NewPost, PostDetail, Profile, Register, Setting } from "../pages";
 
 const Router = () => {
     return (

@@ -1,16 +1,9 @@
-import {
-  START_LOADING,
-  END_LOADING,
-  FETCH_ALL,
-  FETCH_POST,
-  
-  CREATE,
-  UPDATE,
-  DELETE,
-  LIKE,
-  COMMENT,
-} from '../constants/actionTypes';
 import * as api from '../api/posts';
+import {
+  COMMENT, CREATE, DELETE, END_LOADING,
+  FETCH_ALL,
+  FETCH_POST, LIKE, START_LOADING, UPDATE
+} from '../constants/actionTypes';
 
 export const getPost = (id:any) => async (dispatch:any) => {
   try {
@@ -71,6 +64,7 @@ export const likePost = (id:any) => async (dispatch:any) => {
 
   try {
     const { data } = await api.likePost(id);
+   
 
     dispatch({ type: LIKE, payload: data });
   } catch (error) {
@@ -95,6 +89,16 @@ export const deletePost = (id:any) => async (dispatch:any) => {
     await await api.deletePost(id);
 
     dispatch({ type: DELETE, payload: id });
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const getPostByUser = (id:any) => async (dispatch:any) => {
+  try {
+    const {data} = await api.fetchPostByUser(id);
+    console.log("🚀 ~ file: posts.tsx ~ line 99 ~ getPostByUser ~ data", data)
+    localStorage.setItem("postByUser", JSON.stringify(data));
+    
   } catch (error) {
     console.log(error);
   }

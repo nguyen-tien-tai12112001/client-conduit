@@ -1,0 +1,110 @@
+a {
+    color: #5cb85c;
+    text-decoration: none;
+}
+.menu{
+    text-align: center;
+    width:120px;
+    color :#5cb85c;
+    padding: 10px;
+    border-bottom: 1px solid #5cb85c;
+    position: relative;
+    z-index:  1;
+    top:6px;
+    /* font-weight: 500; */
+    font-size:16px;
+
+}
+.article-preview {
+    border-top: 1px solid rgba(0,0,0,.1);
+    padding: 1.5rem 0;
+    position: relative;
+    margin-top: 5px;
+}
+
+.article-meta{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: stretch;
+}
+
+.article-meta img {
+    display: inline-block;
+    vertical-align: middle;
+    height: 32px;
+    width: 32px;
+    border-radius: 30px;
+}
+
+.date{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: stretch;
+    margin-left: 5px;
+}
+
+.pull-xs-right{
+    position: absolute;
+    right: 2px;
+}
+
+.preview-link{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: stretch;
+    
+}
+
+.preview-link p{
+    color: #999;
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+.preview-link span{
+    max-width: 30%;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: #bbb;
+    vertical-align: middle;
+}
+
+.preview-link h1{
+    font-weight: 500!important;
+    font-size: 1.5rem!important;
+    margin-bottom: 3px;
+    margin-top: 10px;
+}
+
+.tag-list{
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    font-weight: 300;
+    font-size: 1.3rem!important;
+    padding-top: 0!important;
+    padding-bottom: 0!important;
+    border: 1px solid #ddd;
+    color: #aaa!important;
+    background: 0 0!important;
+    padding-right: 0.6em;
+    padding-left: 0.6em;
+    border-radius: 10rem;
+    list-style-type: none;
+}
+
+.sidebar {
+    padding: 5px 10px 4px;
+    background: #f3f3f3;
+    border-radius: 4px;
+    margin: 10px 10px 10px 20px;
+}

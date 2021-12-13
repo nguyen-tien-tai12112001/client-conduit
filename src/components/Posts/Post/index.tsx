@@ -1,11 +1,27 @@
 import React, { FC,useState } from 'react'
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import moment from "moment"
+import { useDispatch } from 'react-redux';
+import { likePost } from '../../../actions/posts';
 const Post :FC<any> = ({post}) => {
-    const [like, setLike] = useState<boolean>(false);
-    const buttonHandler = () => {
-        setLike(!like)    
-      }
+    const user = JSON.parse(localStorage.getItem('profile') as string);
+  const [likes, setLikes] = useState(post?.likes);
+  const userId =  user?.result?._id;
+
+  const hasLikedPost = post?.likes?.find((like:string) => like === userId);
+  const handleLike = async () => {
+    dispatch(likePost(post._id));
+
+    if (hasLikedPost) {
+      setLikes(post.likes.filter((id:any) => id !== userId));
+    } else {
+      setLikes([...post.likes, userId]);
+    }
+  };
+  const dispatch = useDispatch();
+  const history = useNavigate();
+  
+   
     return (
         <div>
                          <div className="article-preview">
@@ -18,8 +34,10 @@ const Post :FC<any> = ({post}) => {
                                      <span style ={{opacity:"0.5",fontSize:"13px"}}>{moment(post.createdAt).format("llll")}</span>
                                  </div>
                                  <div className="pull-xs-right">
-                                     <button onClick={buttonHandler}>
-                                         {like? <i className="fas fa-heart true"></i> :<i className="far fa-heart false"></i>} {post?.likes.length}
+                                     <button disabled={!user?.result}
+          onClick={handleLike}>
+                                         {likes.find((like:any) => like === userId) ? <i className="fas fa-heart true"></i> :<i className="far fa-heart false"></i>} {post?.likes.length}
+                                         {/* <Likes /> */}
                                      </button>
                                  </div>
                              </div> 

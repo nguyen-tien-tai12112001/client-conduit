@@ -1,38 +1,40 @@
-import React from 'react'
-import { Form, Input, Button,Row, Col, Divider,Typography } from 'antd';
+import { Button, Col, Divider, Form, Input, Row, Typography } from 'antd';
+import React from 'react';
 import { useDispatch } from 'react-redux';
-import { useForm } from "react-hook-form";
-import {Link,useNavigate} from "react-router-dom"
+import { Link, useNavigate } from 'react-router-dom';
+import { signin } from '../../actions/auth';
 
-import { signin, signup } from '../../actions/auth';
 const { Text } = Typography;
-const style = { background: '#fafdff',margin:"100px 0px 0px 0px",fontSize:'30px'};
+const style = {
+  background: '#fafdff',
+  margin: '100px 0px 0px 0px',
+  fontSize: '30px',
+};
 
 const Login = () => {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
-    const onFinish = (values: any) => {
-      dispatch(signin(values, navigate));
-      };
-    
-      const onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
-      };
-    
-    
-      return (
-          <Row>
-              <Col span={8}/>
-              <Col span={8}>
-              <Divider orientation="center" style = {style} plain >Sign in</Divider>
-              <Divider orientation="center">
+  const onFinish = (values: any) => {
+    dispatch(signin(values, navigate));
+  };
 
-              <Text type="success" >
-                  <Link to ="/register">Need an account?</Link>
-              </Text>
-              </Divider>
-         
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
+  };
+
+  return (
+    <Row>
+      <Col span={8} />
+      <Col span={8}>
+        <Divider orientation="center" style={style} plain>
+          Sign in
+        </Divider>
+        <Divider orientation="center">
+          <Text type="success">
+            <Link to="/register">Need an account?</Link>
+          </Text>
+        </Divider>
+
         <Form
           name="basic"
           labelCol={{ span: 8 }}
@@ -40,7 +42,6 @@ const Login = () => {
           initialValues={{ remember: true }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
-          
           autoComplete="off"
         >
           <Form.Item
@@ -49,32 +50,26 @@ const Login = () => {
             rules={[{ required: true, message: 'Please input your email!' }]}
           >
             <Input placeholder="Email" />
-            
           </Form.Item>
-    
+
           <Form.Item
             label="Password"
             name="password"
             rules={[{ required: true, message: 'Please input your password!' }]}
           >
-            <Input.Password  placeholder="Password"  />
-            
+            <Input.Password placeholder="Password" />
           </Form.Item>
-    
-          
-    
+
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button type="primary" htmlType="submit">
               Signin
             </Button>
           </Form.Item>
         </Form>
-        
-              </Col>
-              <Col span={8}/>
-         
-        </Row>
-      )
-}
+      </Col>
+      <Col span={8} />
+    </Row>
+  );
+};
 
-export default Login
+export default Login;
