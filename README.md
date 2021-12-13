@@ -1,4 +1,4 @@
 
-[Link demo](https://friendly-volhard-27e026.netlify.app/)
+[Link demo](https://agitated-leakey-91d5d2.netlify.app/register/)
 
 [Link git server](https://github.com/nguyen-tien-tai12112001/server-conduit)
