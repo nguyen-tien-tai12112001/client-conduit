@@ -1,4 +1,4 @@
-import { Button, Col, Row, Typography } from 'antd';
+import { Button, Col, Modal, Row, Typography } from 'antd';
 import 'antd/dist/antd.css';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
@@ -16,37 +16,57 @@ function PostDetail() {
   var storage: any = localStorage.getItem('profile');
   const [user, setUser] = useState<any>(JSON.parse(storage));
   const location = useLocation();
-  const isUser = user.result._id === post?.creator;
+  const isUser = user?.result?._id === post?.creator;
   useEffect(() => {
     setUser(JSON.parse(storage));
   }, [location]);
   console.log('🚀 ~ file: index.tsx ~ line 16 ~ PostDetail ~ post', post);
   const dispatch = useDispatch();
   const history = useNavigate();
-const handleUpdatePost = ()=>{
-  localStorage.setItem("currentId","0")
-  history("/posts")
-}
+
   const { id } = useParams();
 
   useEffect(() => {
     dispatch(getPost(id));
   }, [id]);
+  const [visible, setVisible] = React.useState(false);
+  const [confirmLoading, setConfirmLoading] = React.useState(false);
+  const [modalText, setModalText] = React.useState('Do you want to delete this post?');
+
+  const showModal = () => {
+    setVisible(true);
+  };
+
+  const handleOk = () => {
+    setModalText('Delete......');
+    setConfirmLoading(true);
+    dispatch(deletePost(post._id));
+    setTimeout(() => {
+      setVisible(false);
+      setConfirmLoading(false);
+      history('/');
+    }, 2000);
+  };
+
+  const handleCancel = () => {
+    console.log('Clicked cancel button');
+    setVisible(false);
+  };
 
   if (!post) return null;
 
   return (
     <Row justify="center">
       <Col xs={24} md={24} xl={24} className="banner">
-        <Row justify="center">
-          <Col xs={23} md={18} xl={18}>
+        <Row justify="space-around">
+          <Col xs={23} md={18} xl={20}>
             <div className="content">
               <Title style={{ color: 'white' }}>{post.title}</Title>
               <div className="article-meta">
                 <a>
                   <img
                     src={
-                      user?.result.image || post.image
+                      user?.result.image
                         ? 'https://joeschmoe.io/api/v1/random'
                         : 'https://api.realworld.io/images/smiley-cyrus.jpeg'
                     }
@@ -72,10 +92,9 @@ const handleUpdatePost = ()=>{
                     </Button> */}
                     <Button
                       style={{ marginLeft: '5px' }}
-                      onClick={() => {
-                        dispatch(deletePost(post._id));
-                        history('/');
-                      }}
+                      onClick={
+                      showModal
+                    }
                       type="primary"
                       danger
                       ghost
@@ -96,9 +115,9 @@ const handleUpdatePost = ()=>{
 
       <Col xs={24} md={24} xl={24}>
         <Row justify="center">
-          <Col xs={23} md={18} xl={18} className="border">
+          <Col xs={23} md={18} xl={19} className="border">
             <Title
-              style={{ textAlign: 'start', paddingBottom: '3rem' }}
+              style={{ textAlign: 'start', paddingBottom: '3rem',marginLeft:"-15px" }}
               level={4}
             >
               {post.article}
@@ -113,6 +132,16 @@ const handleUpdatePost = ()=>{
           </Col>
         </Row>
       </Col>
+      
+      <Modal
+        title="Title"
+        visible={visible}
+        onOk={handleOk}
+        confirmLoading={confirmLoading}
+        onCancel={handleCancel}
+      >
+        <p>{modalText}</p>
+      </Modal>
     </Row>
   );
 }

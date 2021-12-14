@@ -4,22 +4,31 @@ a {
 }
 .menu{
     text-align: center;
-    width:120px;
-    color :#5cb85c;
-    padding: 10px;
-    border-bottom: 1px solid #5cb85c;
+    width:110px;
+    /* color :#5cb85c; */
+    padding-bottom: 30px;
+    border: none;
     position: relative;
     z-index:  1;
-    top:6px;
+    top:16px;
     /* font-weight: 500; */
     font-size:16px;
-
 }
+.menu:active
+,.menu:hover{
+    border:none;
+}
+.menu.active{
+    color :#5cb85c;
+    border-bottom: 1px solid #5cb85c;
+    
+}
+
 .article-preview {
     border-top: 1px solid rgba(0,0,0,.1);
     padding: 1.5rem 0;
     position: relative;
-    margin-top: 5px;
+    margin-top: 15px;
 }
 
 .article-meta{

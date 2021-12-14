@@ -1,15 +1,20 @@
 import * as api from '../api/auth';
-import { AUTH, LOGIN_FAIL, SIGNUP_FAIL, UPDATE_PROFILE } from '../constants/actionTypes';
+import {
+  AUTH,
+  LOGIN_FAIL,
+  SIGNUP_FAIL,
+  UPDATE_PROFILE,
+} from '../constants/actionTypes';
 
- const signin = (formData:any, router:any) => async (dispatch:any) => {
+const signin = (formData: any, router: any) => async (dispatch: any) => {
   try {
     const { data } = await api.signIn(formData);
-    console.log("🚀 ~ file: auth.tsx ~ line 7 ~ signin ~ data", data)
+    console.log('🚀 ~ file: auth.tsx ~ line 7 ~ signin ~ data', data);
 
     dispatch({ type: AUTH, data });
 
     router('/');
-  } catch (error:any) {
+  } catch (error: any) {
     const er = error?.response?.data?.message;
     console.log(er);
 
@@ -17,14 +22,14 @@ import { AUTH, LOGIN_FAIL, SIGNUP_FAIL, UPDATE_PROFILE } from '../constants/acti
   }
 };
 
- const signup = (formData:any, router:any) => async (dispatch:any) => {
+const signup = (formData: any, router: any) => async (dispatch: any) => {
   try {
     const { data } = await api.signUp(formData);
 
     dispatch({ type: AUTH, data });
 
     router('/');
-  } catch (error:any) {
+  } catch (error: any) {
     // console.log(error.response.data.message);
 
     const er = error.response.data.message;
@@ -33,22 +38,22 @@ import { AUTH, LOGIN_FAIL, SIGNUP_FAIL, UPDATE_PROFILE } from '../constants/acti
     dispatch({ type: SIGNUP_FAIL, er });
   }
 };
- const updateProfile = (formData:any,id:string, router:any) => async (dispatch:any) => {
-  try {
-    const { data } = await api.updateProfile(formData,id);
+const updateProfile =
+  (formData: any, id: string, router: any) => async (dispatch: any) => {
+    try {
+      const { data } = await api.updateProfile(formData, id);
 
-    dispatch({ type: UPDATE_PROFILE, data });
+      dispatch({ type: UPDATE_PROFILE, data });
 
-    router('/profile');
-  } catch (error:any) {
-    // console.log(error.response.data.message);
+      router('/profile');
+    } catch (error: any) {
+      // console.log(error.response.data.message);
 
-    const er = error.response.data.message;
-    console.log(er);
+      const er = error.response.data.message;
+      console.log(er);
 
-    // dispatch({ type: SIGNUP_FAIL, er });
-  }
-};
+      // dispatch({ type: SIGNUP_FAIL, er });
+    }
+  };
 
 export { signin, signup, updateProfile };
-
