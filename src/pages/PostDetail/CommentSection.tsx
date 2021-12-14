@@ -1,17 +1,18 @@
-import { Button, Comment, Tooltip, Avatar,Typography } from 'antd';
+import { Button, Comment, Tooltip, Avatar, Typography } from 'antd';
 import React, { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import './index.css';
 import { commentPost } from '../../actions/posts';
 import moment from 'moment';
-const { Text, Link } = Typography;
+const { Text } = Typography;
 const CommentSection: FC<any> = ({ post }) => {
   const user = JSON.parse(localStorage.getItem('profile') as string);
-
   const [comment, setComment] = useState('');
   const [error, setError] = useState('');
-  const dispatch = useDispatch();
   const [comments, setComments] = useState<any>(post?.comments);
+
+  const dispatch = useDispatch();
+
   const handleComment = async () => {
     if (comment.trim().length > 0) {
       const newComments = await dispatch(
@@ -22,8 +23,6 @@ const CommentSection: FC<any> = ({ post }) => {
     } else {
       setError('You have not entered a comment.');
     }
-
-    
   };
 
   return (
@@ -49,7 +48,7 @@ const CommentSection: FC<any> = ({ post }) => {
           }
         />
       ))}
-{!user ? <Text mark>Please login to comment</Text> : ""}
+      {!user ? <Text mark>Please login to comment</Text> : ''}
       <form className="form">
         <textarea
           placeholder="Write a comment..."
@@ -71,8 +70,7 @@ const CommentSection: FC<any> = ({ post }) => {
             style={{ position: 'absolute', right: '5px', bottom: '10px' }}
             type="primary"
             onClick={handleComment}
-            disabled={
-              !user ? true : false}
+            disabled={!user ? true : false}
           >
             Post comment
           </Button>

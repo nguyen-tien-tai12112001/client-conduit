@@ -18,7 +18,7 @@ const Home = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getPosts(1));
-  }, []);
+  }, [dispatch]);
   return (
     <>
       <Row>

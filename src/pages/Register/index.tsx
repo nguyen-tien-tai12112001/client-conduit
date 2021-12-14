@@ -12,6 +12,7 @@ const style = {
 const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  
   const onFinish = (values: any) => {
     dispatch(signup(values, navigate));
   };

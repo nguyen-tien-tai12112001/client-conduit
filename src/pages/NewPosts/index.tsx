@@ -24,31 +24,31 @@ const NewPost = () => {
     tags: [],
     about: '',
   });
-  const location = useLocation()
-
-  const [currentId, setCurrentId] = useState(localStorage.getItem('currentId') as string);
+  const [currentId, setCurrentId] = useState(
+    localStorage.getItem('currentId') as string
+  );
   const post = useSelector((state: any) =>
     currentId
       ? state?.posts.posts.find((message: any) => message._id === currentId)
       : null
   );
-  const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem('profile') as string);
+  const location = useLocation();
+  const dispatch = useDispatch();
   const navigate: any = useNavigate();
-  const clear = () => {
-    setCurrentId("0");
-    setPostData({ title: '', message: '', tags: [], about: '' });
-  };
+
   useEffect(() => {
-    setCurrentId(localStorage.getItem('currentId') as string)
+    setCurrentId(localStorage.getItem('currentId') as string);
     if (!post?.title) clear();
     if (post) setPostData(post);
-  }, [post,location]);
+  }, [post, location]);
 
+  const clear = () => {
+    setCurrentId('0');
+    setPostData({ title: '', message: '', tags: [], about: '' });
+  };
   const onFinish = (values: any) => {
-    if (currentId === "0") {
-      // console.log("🚀 ~ file: index.tsx ~ line 36 ~ onFinish ~ values", values)
-
+    if (currentId === '0') {
       if (!values.title || !values.about || !values.article) return;
       dispatch(
         createPost(
@@ -65,9 +65,6 @@ const NewPost = () => {
     }
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
   return (
     <Row style={{ marginTop: '60px' }}>
       <Col span={4} />
@@ -78,7 +75,6 @@ const NewPost = () => {
           wrapperCol={{ span: 24 }}
           initialValues={{ remember: true }}
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
           <Form.Item

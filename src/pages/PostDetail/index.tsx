@@ -7,31 +7,29 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { deletePost, getPost } from '../../actions/posts';
 import CommentSection from './CommentSection';
 import './index.css';
-
 const { Title } = Typography;
 
 function PostDetail() {
-  const { post, posts, isLoading } = useSelector((state: any) => state.posts);
-  console.log('🚀 ~ file: index.tsx ~ line 17 ~ PostDetail ~ post', post);
   var storage: any = localStorage.getItem('profile');
+  const { post} = useSelector((state: any) => state.posts);
   const [user, setUser] = useState<any>(JSON.parse(storage));
-  const location = useLocation();
+  const [visible, setVisible] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
+  const [modalText, setModalText] = useState('Do you want to delete this post?');
   const isUser = user?.result?._id === post?.creator;
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const history = useNavigate();
+  const location = useLocation();
   useEffect(() => {
     setUser(JSON.parse(storage));
   }, [location]);
-  console.log('🚀 ~ file: index.tsx ~ line 16 ~ PostDetail ~ post', post);
-  const dispatch = useDispatch();
-  const history = useNavigate();
-
-  const { id } = useParams();
 
   useEffect(() => {
     dispatch(getPost(id));
-  }, [id]);
-  const [visible, setVisible] = React.useState(false);
-  const [confirmLoading, setConfirmLoading] = React.useState(false);
-  const [modalText, setModalText] = React.useState('Do you want to delete this post?');
+    
+  }, [id,dispatch]);
+ 
 
   const showModal = () => {
     setVisible(true);
