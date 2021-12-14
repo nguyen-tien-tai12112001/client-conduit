@@ -125,7 +125,7 @@ const Setting = () => {
           </Button>
         </form>
       </Col>
-      <Col span={8} />
+      
     </Row>
   );
 };
