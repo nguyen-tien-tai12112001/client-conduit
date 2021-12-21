@@ -1,74 +1,90 @@
-import { Button, Col, Divider, Form, Input, Row, Typography } from 'antd';
-import React from 'react';
+
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import * as yup from "yup";
 import { signin } from '../../actions/auth';
+interface IFormInput {
+  email: string;
+  password: string;
 
-const { Text } = Typography;
-const style = {
-  background: '#fafdff',
-  margin: '100px 0px 0px 0px',
-  fontSize: '30px',
-};
+}
+const schema = yup.object({
+  email: yup.string().email().required(),
+  password: yup.string().required(),
+}).required();
 
 const Login = () => {
+ 
+  const { register, formState: { errors }, handleSubmit } = useForm<IFormInput>({resolver: yupResolver(schema)});
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const onFinish = (values: any) => {
-    dispatch(signin(values, navigate));
-  };
+  const onSubmit: SubmitHandler<IFormInput> = data => {
+    dispatch(signin(data, navigate));
+  }
+  
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
+ 
 
   return (
-    <Row>
-      <Col span={8} />
-      <Col span={8}>
-        <Divider orientation="center" style={style} plain>
-          Sign in
-        </Divider>
-        <Divider orientation="center">
-          <Text type="success">
-            <Link to="/register">Need an account?</Link>
-          </Text>
-        </Divider>
+   
+    <div className="auth-page">
+    <div className="container page">
+      <div className="row">
 
-        <Form
-          name="basic"
-          labelCol={{ span: 8 }}
-          wrapperCol={{ span: 16 }}
-          initialValues={{ remember: true }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off"
-        >
-          <Form.Item
-            label="Email"
-            name="email"
-            rules={[{ required: true, message: 'Please input your email!' }]}
-          >
-            <Input placeholder="Email" />
-          </Form.Item>
+        <div className="col-md-6 offset-md-3 col-xs-12">
+          <h1 className="text-xs-center">Sign In</h1>
+          <p className="text-xs-center">
+            <Link to="/register">
+              Need an account?
+            </Link>
+          </p>
 
-          <Form.Item
-            label="Password"
-            name="password"
-            rules={[{ required: true, message: 'Please input your password!' }]}
-          >
-            <Input.Password placeholder="Password" />
-          </Form.Item>
+          
 
-          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="primary" htmlType="submit">
-              Signin
-            </Button>
-          </Form.Item>
-        </Form>
-      </Col>
-      <Col span={8} />
-    </Row>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <fieldset>
+
+              <fieldset className="form-group">
+                <input
+                  className="form-control form-control-lg"
+                  {...register("email", { required: true })}
+                  type="email"
+                  placeholder="Email"
+                  
+                 />
+  <i style={{color:"red"}}>{errors.email?.message}</i>
+              </fieldset>
+
+
+              <fieldset className="form-group">
+                <input
+                  className="form-control form-control-lg"
+                  type="password"
+                  placeholder="Password"
+                  {...register("password", { required: true, minLength: 5 })}
+                  
+                   />
+  <i style={{color:"red"}}>{errors.password?.message}</i>
+
+              </fieldset>
+
+              <button
+                className="btn btn-lg btn-primary pull-sm-right"
+                type="submit"
+                >
+                Sign in
+              </button>
+
+            </fieldset>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
   );
 };
 
