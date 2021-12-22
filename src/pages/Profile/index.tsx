@@ -48,10 +48,7 @@ const Profile = () => {
       setLikes([...post.likes, userId]);
     }
   };
-  const handleLogout = () => {
-    localStorage.clear();
-    navigate('/login');
-  };
+  
 
   return (
     <>
@@ -60,16 +57,14 @@ const Profile = () => {
           <Avatar
             src={
               user?.result.image
-                ? 'https://joeschmoe.io/api/v1/random'
+                ? user?.result.image
                 : 'https://api.realworld.io/images/smiley-cyrus.jpeg'
             }
             style={{ width: 150, height: 150 }}
           />
           <Title level={2}>{user?.result.name}</Title>
 
-          <Button type="primary" danger ghost onClick={handleLogout}>
-            Log out
-          </Button>
+          
         </Col>
       </Row>
 
@@ -145,7 +140,7 @@ const Profile = () => {
                       <Link className="" to={`/posts/${post?._id}`}>
                         <img
                           src={
-                            user?.result?.image ||
+                            
                             'https://api.realworld.io/images/smiley-cyrus.jpeg'
                           }
                         />
@@ -173,7 +168,7 @@ const Profile = () => {
                       <span>Read more...</span>
                       <ul className="tag-list">
                         <li
-                          className="tag-default tag-pill tag-outline"
+                          className="tag-pill tag-outline"
                           style={{ fontSize: '13px' }}
                         >
                           implementations

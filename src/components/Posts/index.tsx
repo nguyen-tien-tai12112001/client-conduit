@@ -4,32 +4,40 @@ import './index.css';
 import Post from './Post';
 const Posts = () => {
   const { posts, isLoading } = useSelector((state: any) => state.posts);
+  console.log('🚀 ~ file: index.tsx ~ line 7 ~ Posts ~ posts', posts);
 
   return (
-    <div>
-      <Row justify="center" style={{ marginBottom: '200px' }}>
-        <Col xs={1} md={3} xl={2}></Col>
-        <Col xs={20} md={14} xl={16} style={{ marginLeft: '0px' }}>
-          <div className="menu">Global Feed</div>
-          {isLoading ? (
-            <Spin size="large" style={{ marginTop: '20px' }} />
-          ) : (
-            <>
-              {posts?.map((post: any, i: number) => (
-                <Post post={post} key={i} />
-              ))}
-            </>
-          )}
-        </Col>
-
-        <Col xs={0} md={4} xl={3}>
-          <div className="sidebar">
-            <p>Popular Tags</p>
-            <div className="tag-list"></div>
+    <div className="home-page">
+      <div className="container page">
+        <div className="row">
+         
+          <div className="col-md-9">
+            <div className="feed-toggle">
+              <ul className="nav nav-pills outline-active">
+                <li className="nav-item">
+                  <a href="" className="nav-link active" style={{position: "relative",top:"15px"}}>
+                    Global Feed
+                  </a>
+                </li>
+              </ul>
+            </div>
+            {isLoading ? (
+              <Spin size="large" style={{ marginTop: '20px' }} />
+            ) : (
+              <div style={{marginBottom:"100px"}}>
+                {posts?.map((post: any, i: number) => (
+                  <Post post={post} key={i} />
+                ))}
+              </div>
+            )}
           </div>
-        </Col>
-        <Col xs={1} md={3} xl={3}></Col>
-      </Row>
+          <div className="col-md-3">
+            <div className="sidebar">
+              <p>Popular Tags</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

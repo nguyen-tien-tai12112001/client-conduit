@@ -65,7 +65,7 @@ function PostDetail() {
                   <img
                     src={
                       user?.result.image
-                        ? 'https://joeschmoe.io/api/v1/random'
+                        ? user?.result.image
                         : 'https://api.realworld.io/images/smiley-cyrus.jpeg'
                     }
                   />

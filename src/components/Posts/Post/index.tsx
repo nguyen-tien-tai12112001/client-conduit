@@ -26,7 +26,7 @@ const Post: FC<any> = ({ post }) => {
           <Link className="" to={`/posts/${post._id}`}>
             <img
               src={
-                post.image ||
+                post?.image ||
                 'https://api.realworld.io/images/smiley-cyrus.jpeg'
               }
             />
@@ -55,7 +55,7 @@ const Post: FC<any> = ({ post }) => {
           <span>Read more...</span>
           <ul className="tag-list">
             <li
-              className="tag-default tag-pill tag-outline"
+              className="tag-pill tag-outline"
               style={{ fontSize: '13px' }}
             >
               implementations

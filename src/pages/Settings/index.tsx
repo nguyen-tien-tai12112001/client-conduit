@@ -1,20 +1,22 @@
-import { Button, Col, Divider, Form, Input, Row } from 'antd';
+
 import React, { useEffect, useState } from 'react';
 import './setting.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { updateProfile } from '../../actions/auth';
 
-const style = { padding: '8px 0', fontSize: '38px', margin: '5px 0px' };
+
 const Setting = () => {
   var storage: any = localStorage.getItem('profile');
   const data = useSelector((state: any) => state.auth.authData?.result);
+  
   const [user, setUser] = useState<any>(JSON.parse(storage));
-  const [picture, setPicture] = useState(data ? data.image : '');
-  const [name, setName] = useState(data ? data.name : '');
-  const [bio, setBio] = useState(data ? data.bio : '');
-  const [email, setEmail] = useState(data ? data.email : '');
-  const [password, setPassword] = useState(data ? data.password : '');
+  console.log("🚀 ~ file: index.tsx ~ line 14 ~ Setting ~ user", user)
+  const [picture, setPicture] = useState(user ? user?.result?.image || data?.image : '');
+  const [name, setName] = useState(user ? user?.result?.name ||data?.name : '');
+  const [bio, setBio] = useState(user ? user?.result?.bio ||data?.bio : '');
+  const [email, setEmail] = useState(user ? user?.result?.email ||data?.email : '');
+  const [password, setPassword] = useState(user ?user?.result?.password || data?.password : '');
 
   const dispatch = useDispatch();
   const location = useLocation();
@@ -59,74 +61,100 @@ const Setting = () => {
     };
     dispatch(updateProfile(values, user.result._id, navigate));
   };
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/login');
+  };
 
   return (
-    <Row>
-      <Col span={8} />
-      <Col span={8}>
-        <Divider orientation="center" style={style} plain>
-          Your Settings
-        </Divider>
+   
+    <div className="settings-page">
+        <div className="container page">
+          <div className="row">
+            <div className="col-md-6 offset-md-3 col-xs-12">
 
-        <form onSubmit={handleUpdateProfile}>
-          <div className="Wrapper">
-            <div className="Input">
-              <input
-                type="text"
-                name="url"
-                className="Input-text"
-                placeholder="URL of profile picture"
-                value={picture || 'https://picsum.photos/536/354'}
-                onChange={handlePicture}
-              />
-            </div>
-            <div className="Input">
-              <input
-                type="text"
-                name="username"
-                className="Input-text"
-                placeholder="Username"
-                value={name}
-                onChange={handleName}
-              />
-            </div>
-            <div className="Input">
-              <textarea
-                name="about"
-                className="Input-text"
-                placeholder="Short bio about you"
-                value={bio}
-                onChange={handleBio}
-              />
-            </div>
-            <div className="Input">
-              <input
-                type="email"
-                name="email"
-                className="Input-text"
-                placeholder="Email"
-                onChange={handleEmail}
-                value={email}
-              />
-            </div>
-            <div className="Input">
-              <input
-                type="password"
-                name="newpassword"
-                className="Input-text"
-                onChange={handlePassword}
-                placeholder="New password"
-                value={password}
-              />
+              <h1 className="text-xs-center">Your Settings</h1>
+
+              
+                <form onSubmit={handleUpdateProfile}>
+        <fieldset>
+
+          <fieldset className="form-group">
+            <input
+              className="form-control"
+              type="text"
+              name="url"
+              placeholder="URL of profile picture"
+              value={picture || 'https://picsum.photos/536/354'}
+              onChange={handlePicture} />
+          </fieldset>
+
+          <fieldset className="form-group">
+            <input
+              className="form-control form-control-lg"
+              type="text"
+              name="username"
+              placeholder="Username"
+              value={name}
+              onChange={handleName} />
+          </fieldset>
+
+          <fieldset className="form-group">
+            <textarea
+              className="form-control form-control-lg"
+              // rows="8"
+              placeholder="Short bio about you"
+              value={bio}
+              name="about"
+              onChange={handleBio}>
+            </textarea>
+          </fieldset>
+
+          <fieldset className="form-group">
+            <input
+              className="form-control form-control-lg"
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={email}
+              onChange={handleEmail} />
+          </fieldset>
+
+          <fieldset className="form-group">
+            <input
+              className="form-control form-control-lg"
+              type="password"
+              
+              name="newpassword"
+              placeholder="New Password"
+              value={password}
+              onChange={handlePassword} />
+          </fieldset>
+
+          <button
+            className="btn btn-lg btn-primary pull-sm-right"
+            type="submit"
+            
+            >
+            Update Settings
+          </button>
+
+        </fieldset>
+      </form>
+
+              <hr />
+
+              <button style={{marginBottom:"100px"}}
+                className="btn btn-outline-danger"
+                onClick={handleLogout}
+                >
+                Or click here to logout.
+              </button>
+
             </div>
           </div>
-          <Button type="primary" htmlType="submit" className ="btnChange">
-            Update change
-          </Button>
-        </form>
-      </Col>
-      
-    </Row>
+        </div>
+      </div>
   );
 };
 

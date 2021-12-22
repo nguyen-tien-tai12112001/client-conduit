@@ -7,7 +7,7 @@ const style: React.CSSProperties = {
   backgroundColor: '#333',
   color: '#fff',
   width: '100%',
-  height: '80px',
+  height: '60px',
   position: 'fixed',
   bottom: '0px',
 };
