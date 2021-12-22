@@ -1,4 +1,4 @@
-import { Col, Row, Spin } from 'antd';
+import { Spin } from 'antd';
 import { useSelector } from 'react-redux';
 import './index.css';
 import Post from './Post';
